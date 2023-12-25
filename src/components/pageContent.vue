@@ -29,7 +29,7 @@
       <FolderPageContent @click="showHoverMenu" />
       <FolderPageContent @click="showHoverMenu" />
       <FolderPageContent @click="showHoverMenu" />
-      <FilePageContent @click="showHoverMenu" />
+      <FilePageContent1 @click="showHoverMenu" />
       <FolderPageContent @click="showHoverMenu" />
       <FilePageContent @click="showHoverMenu" />
       <FolderPageContent @click="showHoverMenu" />
@@ -42,12 +42,15 @@
 
 <script>
 import FilePageContent from "./filePageContent.vue";
+import FilePageContent1 from "./filePageContent-1.vue";
+
 import FolderPageContent from "./folderPageContent.vue";
 import MySelectSort from "./mySelectSort.vue";
 
 export default {
   components: {
     FilePageContent,
+    FilePageContent1,
     FolderPageContent,
     MySelectSort,
   },
@@ -83,6 +86,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 .contain-part {
   display: grid;
   gap: 5px;

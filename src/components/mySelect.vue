@@ -106,6 +106,7 @@ export default {
   padding: 0;
   margin: 0;
   position: absolute;
+  z-index: 2;
   top: 140%;
   left: 0;
   width: 100%;
