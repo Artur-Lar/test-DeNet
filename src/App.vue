@@ -1,89 +1,47 @@
 <!-- eslint-disable vue/no-use-v-if-with-v-for -->
 <template>
   <header class="header">
-    <button class="burger-button" @click="toggleMenu">
-      <span class="line"></span>
-      <span class="line"></span>
-      <span class="line"></span>
-    </button>
-    <ul class="listForNav" :class="{ 'hidden-menu': !isMenuOpen }">
-      <li>Главная</li>
-      <li>Контакты</li>
-      <li>Все сотрудники</li>
-      <li>О нас</li>
-    </ul>
+    <div class="header-part">
+      <img class="logo" src="./images/LOGO.svg" alt="logo" />
+      <button class="btn">
+        <img src="./images/upload.svg" alt="upload" /> Upload
+      </button>
+      <button class="btn">
+        <img src="./images/plus-sign.svg" alt="plus" /> New folder
+      </button>
+      <button class="btn btn-no-shadow">
+        <img src="./images/recicle bin.svg" alt="bin" /> Resycle bin
+      </button>
+    </div>
+    <div class="header-part">
+      <mySelect />
+      <img class="search" src="./images/search-sign.svg" alt="search" />
+      <div class="header-balance-used">
+        <p class="text-grey">Used:</p>
+        <p class="text-black">0.4 GB</p>
+        <img src="./images/Line 90.svg" alt="v-line" />
+        <p class="text-grey">Balance:</p>
+        <p class="text-black">0.6 TBY</p>
+        <img src="./images/yellow-plus.svg" alt="add-icon" />
+      </div>
+      <img
+        class="profile-logo"
+        src="./images/profile-logo.svg"
+        alt="profile-logo"
+      />
+    </div>
   </header>
-  <cardForm @create="createCard" />
-  <cardList @updateCards="handleCardUpdated" :cards="cards" />
+  <PageContent />
 </template>
 
 <script>
-import cardForm from "@/components/cardForm.vue";
-import cardList from "@/components/cardList.vue";
-export default {
-  data() {
-    return {
-      isMenuOpen: true,
-      cards: [
-        {
-          id: 1,
-          name: "Ivan",
-          surname: "Smirnov",
-          experience: 10,
-          age: 25,
-          address: "Istanbul",
-        },
-        {
-          id: 2,
-          name: "Alex",
-          surname: "Nikiforov",
-          experience: 15,
-          age: 35,
-          address: "Moscow",
-        },
-        {
-          id: 3,
-          name: "Anna",
-          surname: "Ivanova",
-          experience: 12,
-          age: 22,
-          address: "Krasnodar",
-        },
-        {
-          id: 4,
-          name: "Jennifer",
-          surname: "Anniston",
-          experience: 35,
-          age: 50,
-          address: "Los-Angeles",
-        },
-        {
-          id: 5,
-          name: "Jon",
-          surname: "Snow",
-          experience: 5,
-          age: 30,
-          address: "Westeros",
-        },
-      ],
-    };
-  },
-  methods: {
-    createCard(card) {
-      this.cards.push(card);
-      console.log(card);
-    },
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    handleCardUpdated(updatedCards) {
-      this.cards = updatedCards;
-    },
-  },
+import PageContent from "./components/pageContent.vue";
+import mySelect from "./components/mySelect.vue";
 
+export default {
   components: {
-    cardForm,
-    cardList,
+    PageContent,
+    mySelect,
   },
 };
 </script>
@@ -92,78 +50,70 @@ export default {
 * {
   margin: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
 }
+.btn {
+  cursor: pointer;
+  display: flex;
+  padding: 8px 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: var(--7, #fff);
+  box-shadow: 1px 5px 23px 0px rgba(35, 35, 35, 0.08);
+  border: none;
+  height: 40px;
+}
+</style>
+
+<style scoped>
 .header {
-  background-color: rgb(54, 54, 165);
-  color: white;
-  height: 60px;
+  color: #232323;
+  height: 104px;
   display: flex;
-}
-
-.listForNav {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  width: 70%;
   justify-content: space-between;
+  width: 95%;
   margin: auto;
 }
-
-.conteiner {
-  margin: auto;
-  width: 90%;
+.logo {
+  width: 200px;
+  height: 24px;
 }
-.createCard {
-  width: 85%;
+.header-part {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: auto;
+  align-items: center;
+  gap: 20px;
 }
 
-.burger-button {
-  display: none;
+.btn-no-shadow {
+  box-shadow: none;
 }
-.line {
-  display: block;
-  width: 30px;
-  height: 3px;
-  margin: 6px 0;
-  background: #fff;
-  transition: 0.4s;
+.search {
+  border-radius: 26px;
+  background: rgba(246, 246, 246, 0.4);
+  width: 24px;
+  height: 24px;
 }
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.header-balance-used {
+  border-radius: 10px;
+  border: 1px solid var(--4, #ebebeb);
+  background: rgba(255, 255, 255, 0.8);
+  height: 40px;
+  width: 340px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
-
-@media (max-width: 768px) {
-  .listForNav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    background-color: #333;
-    width: 100%;
-    text-align: center;
-  }
-
-  .listForNav.hidden-menu {
-    display: flex;
-    width: auto;
-  }
-
-  .listForNav li {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .burger-button {
-    display: block;
-  }
+.text-grey {
+  color: var(--2, #676767);
+  font-weight: 300;
+}
+.text-black {
+  color: var(--1, #232323);
+}
+.profile-logo {
+  width: 40px;
+  height: 40px;
 }
 </style>
